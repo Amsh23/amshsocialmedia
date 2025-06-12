@@ -23,31 +23,9 @@ document.addEventListener('DOMContentLoaded', function() {
         galleryModal.style.display = 'block';
         document.body.style.overflow = 'hidden';
     });
-    
-    galleryCloseBtn.addEventListener('click', () => {
+      galleryCloseBtn.addEventListener('click', () => {
         galleryModal.style.display = 'none';
         document.body.style.overflow = 'auto';
-    });
-    
-    // Video Modal Functionality
-    const videoIcon = document.getElementById('open-video');
-    const videoModal = document.getElementById('video-modal');
-    const videoCloseBtn = videoModal.querySelector('.close-modal');
-    
-    videoIcon.addEventListener('click', () => {
-        videoModal.style.display = 'block';
-        document.body.style.overflow = 'hidden';
-    });
-    
-    videoCloseBtn.addEventListener('click', () => {
-        videoModal.style.display = 'none';
-        document.body.style.overflow = 'auto';
-        
-        // Pause video when closing modal
-        const videoPlayer = videoModal.querySelector('video');
-        if (videoPlayer) {
-            videoPlayer.pause();
-        }
     });
     
     // Anime Modal Functionality
@@ -81,20 +59,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     // Close modals when clicking outside content
-    window.addEventListener('click', (e) => {
-        if (e.target === galleryModal) {
+    window.addEventListener('click', (e) => {        if (e.target === galleryModal) {
             galleryModal.style.display = 'none';
             document.body.style.overflow = 'auto';
-        }
-        if (e.target === videoModal) {
-            videoModal.style.display = 'none';
-            document.body.style.overflow = 'auto';
-            
-            // Pause video when closing modal
-            const videoPlayer = videoModal.querySelector('video');
-            if (videoPlayer) {
-                videoPlayer.pause();
-            }
         }
         if (e.target === animeModal) {
             animeModal.style.display = 'none';
@@ -108,20 +75,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Close modals on ESC key
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            if (galleryModal.style.display === 'block') {
+        if (e.key === 'Escape') {            if (galleryModal.style.display === 'block') {
                 galleryModal.style.display = 'none';
                 document.body.style.overflow = 'auto';
-            }
-            if (videoModal.style.display === 'block') {
-                videoModal.style.display = 'none';
-                document.body.style.overflow = 'auto';
-                
-                // Pause video when closing modal
-                const videoPlayer = videoModal.querySelector('video');
-                if (videoPlayer) {
-                    videoPlayer.pause();
-                }
             }
             if (animeModal.style.display === 'block') {
                 animeModal.style.display = 'none';
