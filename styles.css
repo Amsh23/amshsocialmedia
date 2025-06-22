@@ -66,6 +66,57 @@ body {
     margin-bottom: 20px;
 }
 
+.profile-title {
+    font-size: 18px;
+    color: var(--primary-color);
+    font-weight: 500;
+    margin-bottom: 8px;
+}
+
+.profile-contact {
+    margin: 15px 0 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    align-items: center;
+}
+
+.contact-link {
+    color: #444;
+    text-decoration: none;
+    font-size: 15px;
+    transition: color 0.2s;
+}
+
+.contact-link i {
+    margin-right: 7px;
+    color: var(--primary-color);
+}
+
+.contact-link:hover {
+    color: var(--primary-color);
+}
+
+.resume-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 10px 22px;
+    background: var(--primary-color);
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s;
+}
+
+.resume-btn i {
+    margin-right: 7px;
+}
+
+.resume-btn:hover {
+    background: var(--hover-color);
+}
+
 .social-links {
     display: flex;
     flex-direction: column;
@@ -562,4 +613,69 @@ footer {
 
 #movies-modal .media-list-title {
     color: #5f27cd;
+}
+
+.skills-section {
+    background: var(--card-color);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    margin: 35px 0 20px 0;
+    padding: 20px 15px;
+}
+.skills-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    list-style: none;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+}
+.skills-list li {
+    background: #f0f4fa;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 15px;
+    color: #222;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+
+.projects-section {
+    background: var(--card-color);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+    margin: 20px 0 30px 0;
+    padding: 20px 15px;
+}
+.projects-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+.project-card {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 15px 18px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+}
+.project-card h3 {
+    margin: 0 0 6px 0;
+    font-size: 17px;
+    color: var(--primary-color);
+}
+.project-card p {
+    margin: 0 0 8px 0;
+    font-size: 15px;
+    color: #444;
+}
+.project-card a {
+    color: var(--primary-color);
+    text-decoration: underline;
+    font-size: 14px;
+}
+.project-card a:hover {
+    color: var(--hover-color);
 }
