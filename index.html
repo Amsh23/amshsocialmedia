@@ -167,12 +167,18 @@
             <p class="model-description">A 3D character model I created and edited using VRoid Studio. While still a work in progress, it showcases my exploration into 3D character design and modeling.</p>
             <div class="model-container">
                 <model-viewer 
-                    src="6_12_2025 final8_47pm.glb" 
+                    src="6_12_2025_final8_47pm.glb" 
                     alt="3D Character Model created with VRoid Studio"
                     auto-rotate 
                     camera-controls 
                     background-color="#f5f5f5"
+                    shadow-intensity="1"
+                    loading="eager"
+                    reveal="auto"
                     style="width: 100%; height: 400px; border-radius: 12px;">
+                    <div slot="progress-bar" style="display: flex; align-items: center; justify-content: center; height: 100%; color: #4a76a8;">
+                        <p>Loading 3D Model...</p>
+                    </div>
                 </model-viewer>
             </div>
             <div class="model-info">
