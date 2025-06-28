@@ -102,6 +102,94 @@ class CharacterViewer {
             (gltf) => {
                 this.character = gltf.scene;
                 
+                // ============================================================================
+                // AUTOMATIC UNWANTED OBJECT REMOVAL SYSTEM
+                // ============================================================================
+                
+                console.log('🔍 Analyzing GLB model structure...');
+                
+                // List all objects in the model for debugging
+                console.log('📋 All objects found in the GLB model:');
+                const allObjects = [];
+                this.character.traverse((child) => {
+                    if (child.name) {
+                        allObjects.push({
+                            name: child.name,
+                            type: child.type,
+                            material: child.material ? child.material.name || 'unnamed' : 'none'
+                        });
+                    }
+                });
+                console.table(allObjects);
+                
+                // Define unwanted object keywords (case-insensitive)
+                const unwantedKeywords = [
+                    'ground', 'plane', 'floor', 'background', 'sky', 'skybox',
+                    'environment', 'stage', 'platform', 'terrain', 'base',
+                    'bg', 'backdrop', 'world', 'room', 'scene'
+                ];
+                
+                // Unwanted material keywords
+                const unwantedMaterialKeywords = [
+                    'sky', 'bg', 'background', 'ground', 'floor', 'environment'
+                ];
+                
+                const removedObjects = [];
+                
+                // Traverse and remove unwanted objects
+                this.character.traverse((child) => {
+                    let shouldRemove = false;
+                    let reason = '';
+                    
+                    // Check object name
+                    if (child.name) {
+                        const objectName = child.name.toLowerCase();
+                        for (const keyword of unwantedKeywords) {
+                            if (objectName.includes(keyword)) {
+                                shouldRemove = true;
+                                reason = `Object name contains "${keyword}"`;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    // Check material name
+                    if (!shouldRemove && child.material) {
+                        const materialName = (child.material.name || '').toLowerCase();
+                        for (const keyword of unwantedMaterialKeywords) {
+                            if (materialName.includes(keyword)) {
+                                shouldRemove = true;
+                                reason = `Material name contains "${keyword}"`;
+                                break;
+                            }
+                        }
+                    }
+                    
+                    // Remove/hide the unwanted object
+                    if (shouldRemove) {
+                        child.visible = false; // Hide instead of removing to preserve structure
+                        removedObjects.push({
+                            name: child.name || 'unnamed',
+                            type: child.type,
+                            reason: reason
+                        });
+                        
+                        console.log(`🗑️ Hidden object: "${child.name || 'unnamed'}" (${child.type}) - ${reason}`);
+                    }
+                });
+                
+                // Summary of removed objects
+                if (removedObjects.length > 0) {
+                    console.log(`✅ Successfully hidden ${removedObjects.length} unwanted object(s):`);
+                    console.table(removedObjects);
+                } else {
+                    console.log('✨ No unwanted objects found - model is clean!');
+                }
+                
+                // ============================================================================
+                // END OF OBJECT REMOVAL SYSTEM
+                // ============================================================================
+                
                 // Center and scale the character
                 const box = new THREE.Box3().setFromObject(this.character);
                 const center = box.getCenter(new THREE.Vector3());
@@ -134,7 +222,7 @@ class CharacterViewer {
                 const loading = document.getElementById('loading');
                 if (loading) loading.style.display = 'none';
                 
-                console.log('3D Character loaded successfully');
+                console.log('🎉 3D Character loaded successfully with clean background!');
             },
             (progress) => {
                 console.log('Loading progress:', progress);
