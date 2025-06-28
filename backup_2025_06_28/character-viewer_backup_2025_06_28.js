@@ -1,30 +1,3 @@
-/*
-==============================================================================
-                    3D CHARACTER VIEWER MODULE
-                    Copyright © 2025 Amir Shirkhodaee
-==============================================================================
-
-AUTHOR: Amir Shirkhodaee
-DATE: June 28, 2025
-VERSION: v1.0
-GITHUB: https://github.com/Amsh23
-EMAIL: amirshirkhodaeetari@gmail.com
-
-FEATURES:
-- Three.js 3D character rendering
-- Animation system (Idle, Wave, Dance, Special)
-- Mouse tracking for Special mode
-- Responsive canvas resizing
-- Independent module design
-
-DIGITAL SIGNATURE: AmirShirkhodaee-3DCharacterViewer-v1.0-2025
-CHECKSUM: F7A3E8B1C9D42X55
-
-WARNING: Unauthorized modification is prohibited
-Copyright © 2025 Amir Shirkhodaee - All Rights Reserved
-
-==============================================================================*/
-
 // 3D Character Animation Module - Independent from existing site code
 class CharacterViewer {
     constructor() {
@@ -322,11 +295,3 @@ if (document.readyState === 'loading') {
         new CharacterViewer();
     }
 }
-
-/*
-==============================================================================
-End of 3D Character Viewer Module - Copyright © 2025 Amir Shirkhodaee
-GitHub: https://github.com/Amsh23 | Email: amirshirkhodaeetari@gmail.com
-DIGITAL SIGNATURE: AmirShirkhodaee-3DCharacterViewer-v1.0-2025
-==============================================================================
-*/

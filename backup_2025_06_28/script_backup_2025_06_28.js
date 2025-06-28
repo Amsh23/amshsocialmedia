@@ -1,29 +1,3 @@
-/*
-==============================================================================
-                    JAVASCRIPT FOR SOCIAL MEDIA WEBSITE
-                    Copyright © 2025 Amir Shirkhodaee
-==============================================================================
-
-AUTHOR: Amir Shirkhodaee
-DATE: June 28, 2025
-VERSION: v1.0
-GITHUB: https://github.com/Amsh23
-EMAIL: amirshirkhodaeetari@gmail.com
-
-FEATURES:
-- Social links animations
-- Smooth scrolling
-- 3D character viewer integration
-- Interactive elements
-- Mobile responsive functionality
-
-DIGITAL SIGNATURE: AmirShirkhodaee-SocialMediaJS-v1.0-2025
-CHECKSUM: D5E9F2A4B7C31X98
-
-WARNING: Unauthorized modification is prohibited
-Copyright © 2025 Amir Shirkhodaee - All Rights Reserved
-
-==============================================================================
 // Add animation to social links
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize social links animations
@@ -581,10 +555,3 @@ class ThreeCharacterViewer {
     }
 }
 
-/*
-==============================================================================
-End of JavaScript Module - Copyright © 2025 Amir Shirkhodaee
-GitHub: https://github.com/Amsh23 | Email: amirshirkhodaeetari@gmail.com
-DIGITAL SIGNATURE: AmirShirkhodaee-SocialMediaJS-v1.0-2025
-==============================================================================
-*/
