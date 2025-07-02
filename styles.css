@@ -1370,6 +1370,17 @@ footer {
     border: 1px solid #f5c6cb;
 }
 
+/* Analytics Link Styling */
+.social-link.analytics {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.social-link.analytics:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #684d98 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+}
+
 /* ===================================================
    End of CSS Styles - Copyright © 2025 Amir Shirkhodaee
    GitHub: https://github.com/Amsh23 | Email: amirshirkhodaeetari@gmail.com

@@ -192,17 +192,53 @@ class TelegramMessageForm {
         await this.sendMessage(message);
     }
     
-    // Send message directly to Telegram Bot API
+    // Enhanced sendMessage with visitor information
     async sendMessage(message) {
         // Show loading state
         this.setLoadingState(true);
         this.hideMessages();
         
         try {
-            console.log('📤 Sending message directly to Telegram Bot API...');
+            console.log('📤 Sending message with visitor info to Telegram...');
             
-            // Prepare message with sender info
-            const fullMessage = `🌐 New message from your website:\n\n${message}\n\n📅 ${new Date().toLocaleString()}`;
+            // Get visitor information if available
+            let visitorInfo = '';
+            if (window.visitorTracker && window.visitorTracker.visitorData) {
+                const data = window.visitorTracker.visitorData;
+                const flag = this.getCountryFlag(data.country);
+                
+                visitorInfo = `
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+👤 <b>SENDER INFORMATION</b> ${flag}
+
+📍 <b>Location:</b>
+• IP: <code>${data.ip || 'Unknown'}</code>
+• Country: ${data.country || 'Unknown'}
+• City: ${data.city || 'Unknown'}
+• ISP: ${data.isp || 'Unknown'}
+
+💻 <b>Device:</b>
+• Browser: ${data.browser} ${data.browserVersion}
+• Device: ${data.device} ${data.isMobile ? '📱' : '🖥️'}
+• Screen: ${data.screenResolution}
+
+🌐 <b>Session:</b>
+• Referrer: ${data.referrer}
+• Language: ${data.language}
+• Time: ${new Date(data.timestamp).toLocaleString()}
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+`;
+            }
+            
+            // Prepare enhanced message
+            const fullMessage = `💬 <b>New Message from Website</b>
+
+📝 <b>MESSAGE:</b>
+${message}
+
+${visitorInfo}
+📅 <b>Received:</b> ${new Date().toLocaleString()}`;
             
             const response = await fetch(this.API_URL, {
                 method: 'POST',
@@ -220,13 +256,16 @@ class TelegramMessageForm {
             
             if (response.ok && result.ok) {
                 // Success
-                console.log('✅ Message sent successfully to Telegram');
-                this.showSuccess('Message sent successfully! I\'ll get back to you soon.');
+                console.log('✅ Enhanced message sent successfully to Telegram');
+                this.showSuccess('Message sent successfully with your information! I\'ll get back to you soon.');
                 this.messageInput.value = '';
                 this.updateCharCount();
                 
                 // Add success animation
                 this.addSuccessAnimation();
+                
+                // Log the message sending
+                this.logMessageSent(message);
             } else {
                 // Telegram API returned error
                 console.error('❌ Telegram API error:', result);
@@ -254,6 +293,38 @@ class TelegramMessageForm {
         }
     }
     
+    // Get country flag helper
+    getCountryFlag(country) {
+        const flags = {
+            'Iran': '🇮🇷', 'US': '🇺🇸', 'United States': '🇺🇸',
+            'Germany': '🇩🇪', 'France': '🇫🇷', 'UK': '🇬🇧',
+            'Canada': '🇨🇦', 'Australia': '🇦🇺', 'Japan': '🇯🇵',
+            'China': '🇨🇳', 'Russia': '🇷🇺', 'Brazil': '🇧🇷'
+        };
+        return flags[country] || '🌍';
+    }
+    
+    // Log message sending
+    logMessageSent(message) {
+        try {
+            const messageLogs = JSON.parse(localStorage.getItem('message_logs') || '[]');
+            messageLogs.push({
+                timestamp: new Date().toISOString(),
+                message: message,
+                visitorData: window.visitorTracker ? window.visitorTracker.visitorData : null
+            });
+            
+            // Keep only last 50 message logs
+            if (messageLogs.length > 50) {
+                messageLogs.splice(0, messageLogs.length - 50);
+            }
+            
+            localStorage.setItem('message_logs', JSON.stringify(messageLogs));
+        } catch (error) {
+            console.error('❌ Error logging message:', error);
+        }
+    }
+
     // Alternative method using CORS proxy for direct Telegram API calls
     async sendMessageViaProxy(message) {
         try {

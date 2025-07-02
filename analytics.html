@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Analytics Dashboard - Amir Shirkhodaee</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .dashboard-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 2rem;
+        }
+        
+        .analytics-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 1rem 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-item {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+            display: block;
+        }
+        
+        .visitor-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        
+        .visitor-table th, .visitor-table td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .visitor-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .download-btn {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin: 0.5rem;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+        }
+        
+        .country-flag {
+            margin-right: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1><i class="fas fa-chart-line"></i> Visitor Analytics Dashboard</h1>
+        
+        <div class="analytics-card">
+            <h2><i class="fas fa-users"></i> Visitor Statistics</h2>
+            <div class="stats-grid" id="stats-grid">
+                <!-- Stats will be populated by JavaScript -->
+            </div>
+        </div>
+        
+        <div class="analytics-card">
+            <h2><i class="fas fa-globe"></i> Recent Visitors</h2>
+            <div style="margin: 1rem 0;">
+                <button class="download-btn" onclick="downloadVisitorLogs()">
+                    <i class="fas fa-download"></i> Download Visitor Logs (CSV)
+                </button>
+                <button class="download-btn" onclick="downloadMessageLogs()">
+                    <i class="fas fa-envelope"></i> Download Message Logs (CSV)
+                </button>
+                <button class="download-btn" onclick="clearLogs()">
+                    <i class="fas fa-trash"></i> Clear All Logs
+                </button>
+            </div>
+            <div style="overflow-x: auto;">
+                <table class="visitor-table" id="visitor-table">
+                    <thead>
+                        <tr>
+                            <th>Time</th>
+                            <th>Location</th>
+                            <th>IP Address</th>
+                            <th>Browser</th>
+                            <th>Device</th>
+                            <th>Referrer</th>
+                        </tr>
+                    </thead>
+                    <tbody id="visitor-table-body">
+                        <!-- Visitor data will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        
+        <div class="analytics-card">
+            <h2><i class="fas fa-comments"></i> Recent Messages</h2>
+            <div id="messages-container">
+                <!-- Messages will be populated by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Analytics Dashboard JavaScript
+        class AnalyticsDashboard {
+            constructor() {
+                this.init();
+            }
+            
+            init() {
+                this.loadStatistics();
+                this.loadVisitorTable();
+                this.loadMessages();
+                
+                // Refresh every 30 seconds
+                setInterval(() => {
+                    this.loadStatistics();
+                    this.loadVisitorTable();
+                    this.loadMessages();
+                }, 30000);
+            }
+            
+            loadStatistics() {
+                const visitorLogs = JSON.parse(localStorage.getItem('visitor_logs') || '[]');
+                const messageLogs = JSON.parse(localStorage.getItem('message_logs') || '[]');
+                
+                const stats = {
+                    totalVisitors: visitorLogs.length,
+                    totalMessages: messageLogs.length,
+                    uniqueCountries: [...new Set(visitorLogs.map(v => v.country).filter(c => c))].length,
+                    mobileVisitors: visitorLogs.filter(v => v.isMobile).length
+                };
+                
+                const statsGrid = document.getElementById('stats-grid');
+                statsGrid.innerHTML = `
+                    <div class="stat-item">
+                        <span class="stat-number">${stats.totalVisitors}</span>
+                        <span>Total Visitors</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">${stats.totalMessages}</span>
+                        <span>Messages Received</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">${stats.uniqueCountries}</span>
+                        <span>Countries</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">${Math.round((stats.mobileVisitors / stats.totalVisitors) * 100) || 0}%</span>
+                        <span>Mobile Users</span>
+                    </div>
+                `;
+            }
+            
+            loadVisitorTable() {
+                const visitorLogs = JSON.parse(localStorage.getItem('visitor_logs') || '[]');
+                const tableBody = document.getElementById('visitor-table-body');
+                
+                const recentVisitors = visitorLogs.slice(-20).reverse(); // Last 20, newest first
+                
+                tableBody.innerHTML = recentVisitors.map(visitor => {
+                    const flag = this.getCountryFlag(visitor.country);
+                    const time = new Date(visitor.timestamp).toLocaleString();
+                    
+                    return `
+                        <tr>
+                            <td>${time}</td>
+                            <td><span class="country-flag">${flag}</span>${visitor.city || 'Unknown'}, ${visitor.country || 'Unknown'}</td>
+                            <td><code>${visitor.ip || 'Unknown'}</code></td>
+                            <td>${visitor.browser || 'Unknown'} ${visitor.browserVersion || ''}</td>
+                            <td>${visitor.device || 'Unknown'} ${visitor.isMobile ? '📱' : '🖥️'}</td>
+                            <td>${visitor.referrer || 'Direct'}</td>
+                        </tr>
+                    `;
+                }).join('');
+                
+                if (recentVisitors.length === 0) {
+                    tableBody.innerHTML = '<tr><td colspan="6" style="text-align: center; color: #666;">No visitor data available</td></tr>';
+                }
+            }
+            
+            loadMessages() {
+                const messageLogs = JSON.parse(localStorage.getItem('message_logs') || '[]');
+                const container = document.getElementById('messages-container');
+                
+                const recentMessages = messageLogs.slice(-10).reverse(); // Last 10, newest first
+                
+                if (recentMessages.length === 0) {
+                    container.innerHTML = '<p style="color: #666; text-align: center;">No messages received yet</p>';
+                    return;
+                }
+                
+                container.innerHTML = recentMessages.map(msg => {
+                    const time = new Date(msg.timestamp).toLocaleString();
+                    const visitorData = msg.visitorData;
+                    const flag = visitorData ? this.getCountryFlag(visitorData.country) : '🌍';
+                    
+                    return `
+                        <div style="border: 1px solid #eee; border-radius: 8px; padding: 1rem; margin: 0.5rem 0; background: #f9f9f9;">
+                            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+                                <strong>${flag} Message from ${visitorData ? visitorData.country || 'Unknown' : 'Unknown'}</strong>
+                                <small style="color: #666;">${time}</small>
+                            </div>
+                            <div style="background: white; padding: 1rem; border-radius: 4px; margin: 0.5rem 0;">
+                                "${msg.message}"
+                            </div>
+                            ${visitorData ? `
+                                <small style="color: #666;">
+                                    📍 ${visitorData.city || 'Unknown'} • 
+                                    💻 ${visitorData.browser || 'Unknown'} • 
+                                    📱 ${visitorData.isMobile ? 'Mobile' : 'Desktop'}
+                                </small>
+                            ` : ''}
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            getCountryFlag(country) {
+                const flags = {
+                    'Iran': '🇮🇷', 'US': '🇺🇸', 'United States': '🇺🇸',
+                    'Germany': '🇩🇪', 'France': '🇫🇷', 'UK': '🇬🇧',
+                    'Canada': '🇨🇦', 'Australia': '🇦🇺', 'Japan': '🇯🇵',
+                    'China': '🇨🇳', 'Russia': '🇷🇺', 'Brazil': '🇧🇷'
+                };
+                return flags[country] || '🌍';
+            }
+        }
+        
+        // Download functions
+        function downloadVisitorLogs() {
+            const logs = JSON.parse(localStorage.getItem('visitor_logs') || '[]');
+            const csvHeader = 'timestamp,ip,country,city,browser,device,isMobile,referrer,url\n';
+            const csvData = logs.map(log => 
+                `"${log.timestamp}","${log.ip || ''}","${log.country || ''}","${log.city || ''}","${log.browser || ''}","${log.device || ''}","${log.isMobile || false}","${log.referrer || ''}","${log.url || ''}"`
+            ).join('\n');
+            
+            downloadCSV(csvHeader + csvData, 'visitor-logs.csv');
+        }
+        
+        function downloadMessageLogs() {
+            const logs = JSON.parse(localStorage.getItem('message_logs') || '[]');
+            const csvHeader = 'timestamp,message,country,city,ip,browser\n';
+            const csvData = logs.map(log => {
+                const visitor = log.visitorData || {};
+                return `"${log.timestamp}","${log.message}","${visitor.country || ''}","${visitor.city || ''}","${visitor.ip || ''}","${visitor.browser || ''}"`;
+            }).join('\n');
+            
+            downloadCSV(csvHeader + csvData, 'message-logs.csv');
+        }
+        
+        function downloadCSV(content, filename) {
+            const blob = new Blob([content], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        function clearLogs() {
+            if (confirm('Are you sure you want to clear all logs? This action cannot be undone.')) {
+                localStorage.removeItem('visitor_logs');
+                localStorage.removeItem('message_logs');
+                location.reload();
+            }
+        }
+        
+        // Initialize dashboard
+        new AnalyticsDashboard();
+    </script>
+</body>
+</html>
