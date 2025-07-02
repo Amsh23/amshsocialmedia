@@ -6,9 +6,10 @@ This system works completely automatically from GitHub Pages! No manual configur
 
 ### Just Start a Conversation!
 1. Click the "Start Conversation with Bot" button on the website
-2. Send any message to the bot (like "Hello")  
-3. Go back to the website and click "Test Bot Connection"
-4. That's it! The system automatically detects everything
+2. Or visit directly: https://t.me/amshsocialbot
+3. Send any message to the bot (like "Hello")  
+4. Go back to the website and click "Test Bot Connection"
+5. That's it! The system automatically detects everything
 
 ## 🔄 How It Works
 

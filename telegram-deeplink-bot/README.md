@@ -33,27 +33,27 @@ npm start
 ## 🔗 Deep Link Examples
 
 ### Basic Usage
-- **Direct access**: `https://t.me/YOUR_BOT_USERNAME`
-- **Website traffic**: `https://t.me/YOUR_BOT_USERNAME?start=website`
-- **GitHub visitors**: `https://t.me/YOUR_BOT_USERNAME?start=github`
-- **Custom source**: `https://t.me/YOUR_BOT_USERNAME?start=fromsite_123`
+- **Direct access**: `https://t.me/amshsocialbot`
+- **Website traffic**: `https://t.me/amshsocialbot?start=website`
+- **GitHub visitors**: `https://t.me/amshsocialbot?start=github`
+- **Custom source**: `https://t.me/amshsocialbot?start=fromsite_123`
 
 ### Integration with Your Website
 Add these links to your website:
 
 ```html
 <!-- Basic Telegram link -->
-<a href="https://t.me/YOUR_BOT_USERNAME?start=website">
+<a href="https://t.me/amshsocialbot?start=website">
   Contact me on Telegram
 </a>
 
 <!-- From specific page -->
-<a href="https://t.me/YOUR_BOT_USERNAME?start=homepage">
+<a href="https://t.me/amshsocialbot?start=homepage">
   Contact from Homepage
 </a>
 
 <!-- From social media -->
-<a href="https://t.me/YOUR_BOT_USERNAME?start=instagram">
+<a href="https://t.me/amshsocialbot?start=instagram">
   From Instagram
 </a>
 ```

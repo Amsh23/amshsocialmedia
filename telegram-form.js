@@ -336,8 +336,8 @@ class TelegramMessageForm {
         // Update bot link with actual bot username if available
         const botLink = document.getElementById('bot-link');
         if (botLink) {
-            // You can update this with your actual bot username
-            const botUsername = 'YourBotUsername'; // Replace with actual bot username
+            // Updated with actual bot username
+            const botUsername = 'amshsocialbot';
             botLink.href = `https://t.me/${botUsername}`;
         }
     }
