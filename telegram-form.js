@@ -27,8 +27,10 @@ Copyright © 2025 Amir Shirkhodaee - All Rights Reserved
 
 class TelegramMessageForm {
     constructor() {
-        // ⚠️ IMPORTANT: Replace this with your deployed server URL
-        this.API_URL = 'https://your-railway-server.railway.app/send';
+        // Direct Telegram Bot API configuration (GitHub Pages compatible)
+        this.BOT_TOKEN = '7563475603:AAH-bhTQky3DLzTAdA-V3MzzbU2p9zRx6eM';
+        this.CHAT_ID = '1234567890'; // ⚠️ REPLACE with your actual Telegram chat ID
+        this.API_URL = `https://api.telegram.org/bot${this.BOT_TOKEN}/sendMessage`;
         
         // DOM elements
         this.form = document.getElementById('telegram-message-form');
@@ -45,7 +47,7 @@ class TelegramMessageForm {
     }
     
     init() {
-        console.log('🤖 Telegram Message Form initialized');
+        console.log('🤖 Telegram Message Form initialized (Direct API mode)');
         
         // Event listeners
         this.form.addEventListener('submit', (e) => this.handleSubmit(e));
@@ -55,9 +57,12 @@ class TelegramMessageForm {
         // Initial character count update
         this.updateCharCount();
         
-        // Check if API URL needs to be configured
-        if (this.API_URL.includes('your-railway-server')) {
-            console.warn('⚠️ Please update API_URL in telegram-form.js with your deployed server URL');
+        // Check if Chat ID needs to be configured
+        if (this.CHAT_ID === '1234567890') {
+            console.warn('⚠️ Please update CHAT_ID in telegram-form.js with your actual Telegram chat ID');
+            this.showError('Chat ID not configured. Please contact the website owner to set up Telegram integration.');
+        } else {
+            console.log('✅ Telegram bot configured and ready to send messages');
         }
     }
     
@@ -107,28 +112,35 @@ class TelegramMessageForm {
         await this.sendMessage(message);
     }
     
-    // Send message to Telegram via relay server
+    // Send message directly to Telegram Bot API
     async sendMessage(message) {
         // Show loading state
         this.setLoadingState(true);
         this.hideMessages();
         
         try {
-            console.log('📤 Sending message to Telegram...');
+            console.log('📤 Sending message directly to Telegram Bot API...');
+            
+            // Prepare message with sender info
+            const fullMessage = `🌐 New message from your website:\n\n${message}\n\n📅 ${new Date().toLocaleString()}`;
             
             const response = await fetch(this.API_URL, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ message }),
+                body: JSON.stringify({
+                    chat_id: this.CHAT_ID,
+                    text: fullMessage,
+                    parse_mode: 'HTML'
+                }),
             });
             
             const result = await response.json();
             
-            if (response.ok && result.success) {
+            if (response.ok && result.ok) {
                 // Success
-                console.log('✅ Message sent successfully');
+                console.log('✅ Message sent successfully to Telegram');
                 this.showSuccess('Message sent successfully! I\'ll get back to you soon.');
                 this.messageInput.value = '';
                 this.updateCharCount();
@@ -136,23 +148,68 @@ class TelegramMessageForm {
                 // Add success animation
                 this.addSuccessAnimation();
             } else {
-                // Server returned error
-                console.error('❌ Server error:', result.error);
-                this.showError(result.error || 'Failed to send message. Please try again.');
+                // Telegram API returned error
+                console.error('❌ Telegram API error:', result);
+                if (result.description && result.description.includes('chat not found')) {
+                    this.showError('Chat ID not configured. Please contact the website owner.');
+                } else {
+                    this.showError('Failed to send message. Please try again later.');
+                }
             }
             
         } catch (error) {
-            // Network or other error
+            // Network or CORS error
             console.error('❌ Network error:', error);
             
-            if (error.name === 'TypeError' && error.message.includes('fetch')) {
-                this.showError('Unable to connect to server. Please check your internet connection.');
+            if (error.name === 'TypeError' && error.message.includes('CORS')) {
+                this.showError('CORS error. Using alternative method...');
+                // Try alternative method using a public CORS proxy
+                await this.sendMessageViaProxy(message);
             } else {
-                this.showError('An unexpected error occurred. Please try again later.');
+                this.showError('Unable to send message. Please check your internet connection.');
             }
         } finally {
             // Hide loading state
             this.setLoadingState(false);
+        }
+    }
+    
+    // Alternative method using CORS proxy for direct Telegram API calls
+    async sendMessageViaProxy(message) {
+        try {
+            const fullMessage = `🌐 New message from your website:\n\n${message}\n\n📅 ${new Date().toLocaleString()}`;
+            const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+            
+            const response = await fetch(proxyUrl + this.API_URL, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-Requested-With': 'XMLHttpRequest'
+                },
+                body: JSON.stringify({
+                    chat_id: this.CHAT_ID,
+                    text: fullMessage,
+                    parse_mode: 'HTML'
+                }),
+            });
+            
+            if (response.ok) {
+                const result = await response.json();
+                if (result.ok) {
+                    console.log('✅ Message sent via proxy successfully');
+                    this.showSuccess('Message sent successfully! I\'ll get back to you soon.');
+                    this.messageInput.value = '';
+                    this.updateCharCount();
+                    this.addSuccessAnimation();
+                } else {
+                    this.showError('Failed to send message. Please try again.');
+                }
+            } else {
+                this.showError('Failed to send message via proxy. Please try again.');
+            }
+        } catch (error) {
+            console.error('❌ Proxy method failed:', error);
+            this.showError('All delivery methods failed. Please try again later.');
         }
     }
     
@@ -218,6 +275,15 @@ class TelegramMessageForm {
         this.API_URL = url;
         console.log('🔧 API URL updated to:', url);
     }
+    
+    // Public method to update Chat ID (for easy configuration)
+    setChatId(chatId) {
+        this.CHAT_ID = chatId;
+        console.log('🔧 Chat ID updated to:', chatId);
+        
+        // Update API URL with new chat ID
+        this.API_URL = `https://api.telegram.org/bot${this.BOT_TOKEN}/sendMessage`;
+    }
 }
 
 // Initialize when DOM is ready
@@ -240,9 +306,16 @@ End of Telegram Message Form Handler - Copyright © 2025 Amir Shirkhodaee
 GitHub: https://github.com/Amsh23 | Email: amirshirkhodaeetari@gmail.com
 DIGITAL SIGNATURE: AmirShirkhodaee-TelegramForm-v1.0-2025
 
-Usage Example:
-// To update API URL after deployment:
-// window.telegramForm.setApiUrl('https://your-deployed-server.com/send');
+Usage Examples:
+// To update Chat ID after getting it from Telegram:
+// window.telegramForm.setChatId('YOUR_CHAT_ID');
+
+// To get your Chat ID:
+// 1. Start a conversation with your bot
+// 2. Visit: https://api.telegram.org/bot7563475603:AAH-bhTQky3DLzTAdA-V3MzzbU2p9zRx6eM/getUpdates
+// 3. Look for "chat":{"id": and copy the number
+
+SECURITY NOTE: Bot token is visible in source code. Consider using a relay server for production.
 
 ==============================================================================
 */
