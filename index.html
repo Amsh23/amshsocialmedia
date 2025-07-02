@@ -205,8 +205,8 @@ Copyright © 2025 Amir Shirkhodaee - All Rights Reserved
             <p class="character-description">My VRoid Studio character with interactive animations and mouse tracking. Click on the character or use the controls below!</p>
             
             <div id="three-container">
-                <canvas id="three-canvas"></canvas>
-                <div id="loading-indicator">
+                <div id="viewer"></div>
+                <div id="loading">
                     <div class="loading-spinner"></div>
                     <p>Loading 3D Character...</p>
                 </div>
@@ -226,12 +226,52 @@ Copyright © 2025 Amir Shirkhodaee - All Rights Reserved
             </div>
         </section>
 
+        <!-- Telegram Message Form Section -->
+        <section id="telegram-contact">
+            <h2 class="section-title">📱 Send me a Message</h2>
+            <p class="contact-description">Want to get in touch? Send me a message directly through Telegram!</p>
+            
+            <div id="telegram-form-container">
+                <form id="telegram-message-form">
+                    <div class="form-group">
+                        <textarea 
+                            id="telegram-message-input" 
+                            placeholder="Type your message here... (max 500 characters)"
+                            maxlength="500"
+                            rows="4"
+                            required
+                        ></textarea>
+                        <div class="char-counter">
+                            <span id="char-count">0</span>/500 characters
+                        </div>
+                    </div>
+                    <button type="submit" id="send-btn">
+                        <i class="fab fa-telegram-plane"></i>
+                        Send to Telegram
+                    </button>
+                </form>
+                
+                <div id="message-status" class="hidden">
+                    <div id="success-message" class="status-message success hidden">
+                        <i class="fas fa-check-circle"></i>
+                        Message sent successfully!
+                    </div>
+                    <div id="error-message" class="status-message error hidden">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Failed to send message. Please try again.
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <footer>
             <p>&copy; 2025 Amir Shirkhodaee | Created with ❤️</p>
         </footer>
     </div>
 
     <script src="script.js"></script>
+    <script src="character-viewer.js"></script>
+    <script src="telegram-form.js"></script>
 </body>
 <!--
 ==============================================================================

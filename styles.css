@@ -1087,6 +1087,209 @@ footer {
     text-align: center;
 }
 
+/* ===================================================
+   TELEGRAM MESSAGE FORM STYLES
+   ================================================= */
+
+#telegram-contact {
+    background: var(--card-color);
+    border-radius: 20px;
+    padding: 2rem;
+    margin: 2rem 0;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.contact-description {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+}
+
+#telegram-form-container {
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#telegram-message-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    position: relative;
+}
+
+#telegram-message-input {
+    width: 100%;
+    padding: 1rem;
+    border: 2px solid #e1e5e9;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    resize: vertical;
+    min-height: 120px;
+    background: #fafbfc;
+    transition: all 0.3s ease;
+}
+
+#telegram-message-input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(74, 118, 168, 0.1);
+}
+
+#telegram-message-input::placeholder {
+    color: #a8a8a8;
+}
+
+.char-counter {
+    text-align: right;
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 0.5rem;
+}
+
+#send-btn {
+    background: linear-gradient(135deg, var(--primary-color), #5a8bc4);
+    color: white;
+    border: none;
+    padding: 1rem 2rem;
+    border-radius: 12px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(74, 118, 168, 0.3);
+}
+
+#send-btn:hover {
+    background: linear-gradient(135deg, var(--hover-color), #4a76a8);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(74, 118, 168, 0.4);
+}
+
+#send-btn:active {
+    transform: translateY(0);
+}
+
+#send-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+#send-btn i {
+    font-size: 1.2rem;
+}
+
+/* Status Messages */
+.status-message {
+    padding: 1rem;
+    border-radius: 10px;
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.status-message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.status-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Loading state for send button */
+#send-btn.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+#send-btn.loading::after {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border: 2px solid transparent;
+    border-top: 2px solid currentColor;
+    border-radius: 50%;
+    display: inline-block;
+    animation: spin 1s linear infinite;
+    margin-left: 0.5rem;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Responsive Design for Telegram Form */
+@media (max-width: 768px) {
+    #telegram-contact {
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+    }
+    
+    .contact-description {
+        font-size: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    #telegram-message-input {
+        padding: 0.875rem;
+        font-size: 0.95rem;
+        min-height: 100px;
+    }
+    
+    #send-btn {
+        padding: 0.875rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #telegram-contact {
+        padding: 1rem;
+        border-radius: 15px;
+    }
+    
+    #telegram-message-input {
+        padding: 0.75rem;
+        border-radius: 10px;
+        min-height: 90px;
+    }
+    
+    #send-btn {
+        padding: 0.75rem 1.25rem;
+        border-radius: 10px;
+        font-size: 0.95rem;
+    }
+    
+    .char-counter {
+        font-size: 0.8rem;
+    }
+}
+
 /*
 ==============================================================================
 End of CSS Styles - Copyright © 2025 Amir Shirkhodaee
