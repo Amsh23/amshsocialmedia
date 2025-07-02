@@ -1290,10 +1290,89 @@ footer {
     }
 }
 
-/*
-==============================================================================
-End of CSS Styles - Copyright © 2025 Amir Shirkhodaee
-GitHub: https://github.com/Amsh23 | Email: amirshirkhodaeetari@gmail.com
-DIGITAL SIGNATURE: AmirShirkhodaee-SocialMediaCSS-v1.0-2025
+/* Bot Setup Controls */
+.bot-setup-controls {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.test-btn, .bot-link {
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    border: none;
+}
+
+.test-btn {
+    background: linear-gradient(135deg, #6c757d, #868e96);
+    color: white;
+}
+
+.test-btn:hover {
+    background: linear-gradient(135deg, #5a6268, #6c757d);
+    transform: translateY(-2px);
+}
+
+.bot-link {
+    background: linear-gradient(135deg, #28a745, #34ce57);
+    color: white;
+}
+
+.bot-link:hover {
+    background: linear-gradient(135deg, #218838, #28a745);
+    transform: translateY(-2px);
+    text-decoration: none;
+    color: white;
+}
+
+.test-btn:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Auto-config status indicator */
+.config-status {
+    margin-top: 1rem;
+    padding: 0.75rem;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.config-status.detecting {
+    background: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+.config-status.ready {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.config-status.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* ===================================================
+   End of CSS Styles - Copyright © 2025 Amir Shirkhodaee
+   GitHub: https://github.com/Amsh23 | Email: amirshirkhodaeetari@gmail.com
+   DIGITAL SIGNATURE: AmirShirkhodaee-SocialMediaCSS-v1.0-2025
 ==============================================================================
 */

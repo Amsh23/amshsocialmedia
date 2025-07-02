@@ -29,8 +29,9 @@ class TelegramMessageForm {
     constructor() {
         // Direct Telegram Bot API configuration (GitHub Pages compatible)
         this.BOT_TOKEN = '7563475603:AAH-bhTQky3DLzTAdA-V3MzzbU2p9zRx6eM';
-        this.CHAT_ID = '1234567890'; // ⚠️ REPLACE with your actual Telegram chat ID
+        this.CHAT_ID = null; // Will be auto-detected
         this.API_URL = `https://api.telegram.org/bot${this.BOT_TOKEN}/sendMessage`;
+        this.GET_UPDATES_URL = `https://api.telegram.org/bot${this.BOT_TOKEN}/getUpdates`;
         
         // DOM elements
         this.form = document.getElementById('telegram-message-form');
@@ -47,23 +48,91 @@ class TelegramMessageForm {
     }
     
     init() {
-        console.log('🤖 Telegram Message Form initialized (Direct API mode)');
+        console.log('🤖 Telegram Message Form initialized (Auto-detect mode)');
         
         // Event listeners
         this.form.addEventListener('submit', (e) => this.handleSubmit(e));
         this.messageInput.addEventListener('input', () => this.updateCharCount());
         this.messageInput.addEventListener('keydown', (e) => this.handleKeydown(e));
         
+        // Setup extra controls
+        this.setupExtraControls();
+        
         // Initial character count update
         this.updateCharCount();
         
-        // Check if Chat ID needs to be configured
-        if (this.CHAT_ID === '1234567890') {
-            console.warn('⚠️ Please update CHAT_ID in telegram-form.js with your actual Telegram chat ID');
-            this.showError('Chat ID not configured. Please contact the website owner to set up Telegram integration.');
-        } else {
-            console.log('✅ Telegram bot configured and ready to send messages');
+        // Auto-detect Chat ID on first load
+        this.autoDetectChatId();
+    }
+    
+    // Auto-detect Chat ID from bot conversation
+    async autoDetectChatId() {
+        try {
+            console.log('🔍 Auto-detecting Chat ID...');
+            
+            const response = await fetch(this.GET_UPDATES_URL);
+            const data = await response.json();
+            
+            if (data.ok && data.result && data.result.length > 0) {
+                // Get the most recent chat
+                const lastUpdate = data.result[data.result.length - 1];
+                if (lastUpdate.message && lastUpdate.message.chat) {
+                    this.CHAT_ID = lastUpdate.message.chat.id.toString();
+                    console.log('✅ Chat ID auto-detected:', this.CHAT_ID);
+                    
+                    // Update success message
+                    this.showSuccess('Bot configured automatically! Ready to send messages.');
+                    
+                    // Store in localStorage for future use
+                    localStorage.setItem('telegram_chat_id', this.CHAT_ID);
+                    
+                    return true;
+                }
+            }
+            
+            // Try to get from localStorage if API fails
+            const storedChatId = localStorage.getItem('telegram_chat_id');
+            if (storedChatId) {
+                this.CHAT_ID = storedChatId;
+                console.log('✅ Chat ID loaded from storage:', this.CHAT_ID);
+                return true;
+            }
+            
+            // If no chat ID found, show helpful instructions
+            this.showConfigInstructions();
+            return false;
+            
+        } catch (error) {
+            console.warn('⚠️ Auto-detection failed, trying localStorage...', error);
+            
+            // Fallback to localStorage
+            const storedChatId = localStorage.getItem('telegram_chat_id');
+            if (storedChatId) {
+                this.CHAT_ID = storedChatId;
+                console.log('✅ Chat ID loaded from storage:', this.CHAT_ID);
+                return true;
+            }
+            
+            // Show instructions if all else fails
+            this.showConfigInstructions();
+            return false;
         }
+    }
+    
+    // Show configuration instructions to user
+    showConfigInstructions() {
+        const instructionMessage = `
+            🔧 Initial Setup Required:
+            
+            1. Start a conversation with the bot on Telegram
+            2. Send any message (like "Hello")
+            3. Refresh this page
+            
+            The system will automatically detect your Chat ID!
+        `;
+        
+        this.showError(instructionMessage);
+        console.log('📋 Configuration instructions shown to user');
     }
     
     // Update character counter
@@ -106,6 +175,17 @@ class TelegramMessageForm {
         if (message.length > 500) {
             this.showError('Message is too long. Please keep it under 500 characters.');
             return;
+        }
+        
+        // Check if Chat ID is available
+        if (!this.CHAT_ID) {
+            console.log('🔄 Chat ID not available, attempting auto-detection...');
+            const detected = await this.autoDetectChatId();
+            
+            if (!detected) {
+                this.showError('Please start a conversation with the bot on Telegram first, then refresh this page.');
+                return;
+            }
         }
         
         // Send message
@@ -213,6 +293,55 @@ class TelegramMessageForm {
         }
     }
     
+    // Test bot connection
+    async testConnection() {
+        const testBtn = document.getElementById('test-connection-btn');
+        if (testBtn) {
+            testBtn.disabled = true;
+            testBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Testing...';
+        }
+        
+        try {
+            console.log('🧪 Testing bot connection...');
+            
+            // Try to detect Chat ID
+            const detected = await this.autoDetectChatId();
+            
+            if (detected) {
+                this.showSuccess(`✅ Bot connection successful! Chat ID: ${this.CHAT_ID}`);
+                console.log('✅ Bot test successful');
+            } else {
+                this.showError('❌ Bot connection failed. Please start a conversation with the bot first.');
+                console.log('❌ Bot test failed');
+            }
+            
+        } catch (error) {
+            console.error('❌ Bot test error:', error);
+            this.showError('❌ Connection test failed. Check your internet connection.');
+        } finally {
+            if (testBtn) {
+                testBtn.disabled = false;
+                testBtn.innerHTML = '<i class="fas fa-cog"></i> Test Bot Connection';
+            }
+        }
+    }
+    
+    // Setup event listeners for new buttons
+    setupExtraControls() {
+        const testBtn = document.getElementById('test-connection-btn');
+        if (testBtn) {
+            testBtn.addEventListener('click', () => this.testConnection());
+        }
+        
+        // Update bot link with actual bot username if available
+        const botLink = document.getElementById('bot-link');
+        if (botLink) {
+            // You can update this with your actual bot username
+            const botUsername = 'YourBotUsername'; // Replace with actual bot username
+            botLink.href = `https://t.me/${botUsername}`;
+        }
+    }
+
     // Show loading state on send button
     setLoadingState(loading) {
         if (loading) {

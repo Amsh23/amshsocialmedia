@@ -1,0 +1,27 @@
+{
+  "name": "telegram-deeplink-bot",
+  "version": "1.0.0",
+  "description": "Telegram bot with deep linking support to track user sources",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node bot.js",
+    "dev": "node bot.js"
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "^0.64.0",
+    "dotenv": "^16.4.5",
+    "fs": "^0.0.1-security"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "keywords": [
+    "telegram",
+    "bot",
+    "deeplink",
+    "tracking",
+    "nodejs"
+  ],
+  "author": "Amir Shirkhodaee",
+  "license": "MIT"
+}
