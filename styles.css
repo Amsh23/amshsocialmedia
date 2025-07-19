@@ -1381,6 +1381,17 @@ footer {
     box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
 }
 
+/* Contact Form Link Styling */
+.social-link.contact-form {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+}
+
+.social-link.contact-form:hover {
+    background: linear-gradient(135deg, #059669 0%, #047857 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
+}
+
 /* ===================================================
    End of CSS Styles - Copyright © 2025 Amir Shirkhodaee
    GitHub: https://github.com/Amsh23 | Email: amirshirkhodaeetari@gmail.com

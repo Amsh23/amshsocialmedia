@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<!--
+==============================================================================
+                    THANK YOU PAGE - CONTACT FORM SUCCESS
+                    Copyright © 2025 Amir Shirkhodaee
+==============================================================================
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thank You - Message Sent Successfully!</title>
+    
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --success-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .thank-you-container {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin: 2rem;
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--success-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 2.5rem;
+            animation: pulse 2s infinite;
+            box-shadow: 0 20px 40px rgba(16, 185, 129, 0.3);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .thank-you-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .thank-you-message {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .response-time {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .response-time h4 {
+            margin-bottom: 0.5rem;
+            color: #fbbf24;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .btn-custom {
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary-custom {
+            background: white;
+            color: #667eea;
+        }
+
+        .btn-primary-custom:hover {
+            background: transparent;
+            color: white;
+            border-color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-secondary-custom {
+            background: transparent;
+            color: white;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary-custom:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+            transform: translateY(-2px);
+        }
+
+        .social-links {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .social-links h5 {
+            margin-bottom: 1rem;
+            opacity: 0.8;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            text-decoration: none;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-link:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .countdown {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .thank-you-container {
+                padding: 2rem 1.5rem;
+            }
+            
+            .thank-you-title {
+                font-size: 2rem;
+            }
+            
+            .thank-you-message {
+                font-size: 1.1rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-custom {
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="thank-you-container">
+        <!-- Success Icon -->
+        <div class="success-icon">
+            <i class="fas fa-check"></i>
+        </div>
+        
+        <!-- Title and Message -->
+        <h1 class="thank-you-title">Message Sent!</h1>
+        <p class="thank-you-message">
+            Thank you for reaching out! Your message has been successfully delivered to my inbox.
+        </p>
+        
+        <!-- Response Time Info -->
+        <div class="response-time">
+            <h4>
+                <i class="fas fa-clock me-2"></i>
+                Response Time
+            </h4>
+            <p class="mb-0">I typically respond within 24 hours. For urgent matters, feel free to contact me directly via Telegram.</p>
+        </div>
+        
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <a href="index.html" class="btn-custom btn-primary-custom">
+                <i class="fas fa-home"></i>
+                Back to Home
+            </a>
+            <a href="https://t.me/mafolieee" target="_blank" class="btn-custom btn-secondary-custom">
+                <i class="fab fa-telegram"></i>
+                Chat on Telegram
+            </a>
+        </div>
+        
+        <!-- Social Links -->
+        <div class="social-links">
+            <h5>Connect with me:</h5>
+            <a href="https://github.com/Amsh23" target="_blank" class="social-link" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://www.linkedin.com/in/amir-shirkhodaee" target="_blank" class="social-link" title="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://t.me/mafolieee" target="_blank" class="social-link" title="Telegram">
+                <i class="fab fa-telegram"></i>
+            </a>
+            <a href="mailto:amirshirkhodaeetari@gmail.com" class="social-link" title="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+        
+        <!-- Auto-redirect countdown -->
+        <div class="countdown">
+            <p id="redirectText">Redirecting to home page in <span id="countdown">10</span> seconds...</p>
+        </div>
+    </div>
+
+    <!-- Bootstrap 5 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        // Countdown timer for auto-redirect
+        let countdown = 10;
+        const countdownElement = document.getElementById('countdown');
+        const redirectText = document.getElementById('redirectText');
+        
+        const timer = setInterval(() => {
+            countdown--;
+            countdownElement.textContent = countdown;
+            
+            if (countdown <= 0) {
+                clearInterval(timer);
+                redirectText.textContent = 'Redirecting...';
+                window.location.href = 'index.html';
+            }
+        }, 1000);
+        
+        // Add some confetti effect (optional)
+        function createConfetti() {
+            const colors = ['#667eea', '#764ba2', '#10b981', '#fbbf24', '#ef4444', '#8b5cf6'];
+            
+            for (let i = 0; i < 50; i++) {
+                const confetti = document.createElement('div');
+                confetti.style.cssText = `
+                    position: fixed;
+                    width: 10px;
+                    height: 10px;
+                    background: ${colors[Math.floor(Math.random() * colors.length)]};
+                    top: -10px;
+                    left: ${Math.random() * 100}vw;
+                    z-index: 1000;
+                    pointer-events: none;
+                    border-radius: 50%;
+                    animation: confettiFall ${Math.random() * 3 + 2}s linear forwards;
+                `;
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => confetti.remove(), 5000);
+            }
+        }
+        
+        // Add confetti animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes confettiFall {
+                to {
+                    transform: translateY(100vh) rotate(720deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        // Trigger confetti on load
+        window.addEventListener('load', createConfetti);
+        
+        // Add visitor tracking if available
+        if (typeof window.visitorTracker !== 'undefined') {
+            console.log('🎉 Thank you page loaded - contact form submitted');
+        }
+        
+        // Prevent accidental navigation away
+        let hasInteracted = false;
+        document.addEventListener('click', () => hasInteracted = true);
+        document.addEventListener('keydown', () => hasInteracted = true);
+        
+        window.addEventListener('beforeunload', (e) => {
+            if (!hasInteracted && countdown > 0) {
+                e.preventDefault();
+                e.returnValue = '';
+            }
+        });
+    </script>
+</body>
+</html>
