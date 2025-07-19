@@ -1392,6 +1392,44 @@ footer {
     box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
 }
 
+/* Live Chat Button Styling */
+.social-link.live-chat {
+    background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link.live-chat::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.5s;
+}
+
+.social-link.live-chat:hover::before {
+    left: 100%;
+}
+
+.social-link.live-chat:hover {
+    background: linear-gradient(135deg, #9333EA 0%, #8B5CF6 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(139, 92, 246, 0.4);
+}
+
+.social-link.live-chat i {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
 /* ===================================================
    End of CSS Styles - Copyright © 2025 Amir Shirkhodaee
    GitHub: https://github.com/Amsh23 | Email: amirshirkhodaeetari@gmail.com

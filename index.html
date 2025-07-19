@@ -110,6 +110,11 @@ Copyright © 2025 Amir Shirkhodaee - All Rights Reserved
                     <span>Contact Form</span>
                 </a>
                 
+                <a href="javascript:void(0)" class="social-link live-chat" onclick="openTawkToChat()">
+                    <i class="fas fa-headset"></i>
+                    <span>Live Chat Support</span>
+                </a>
+                
                 <a href="analytics.html" class="social-link analytics" target="_blank">
                     <i class="fas fa-chart-line"></i>
                     <span>Analytics Dashboard</span>
@@ -321,11 +326,61 @@ Copyright © 2025 Amir Shirkhodaee - All Rights Reserved
     (function(){
     var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
     s1.async=true;
-    s1.src='https://embed.tawk.to/687bcb15b0d86c191829f647/1j0hp2jle';
+    s1.src='https://embed.tawk.to/669ceb7abecc2fed692bf55e/1i35m5a7r';
     s1.charset='UTF-8';
     s1.setAttribute('crossorigin','*');
     s0.parentNode.insertBefore(s1,s0);
     })();
+    
+    // Additional Tawk.to customization
+    window.addEventListener('load', function() {
+        // Ensure Tawk.to is properly loaded
+        if (typeof Tawk_API !== 'undefined') {
+            Tawk_API.onLoad = function(){
+                console.log('💬 Tawk.to Chat Widget loaded successfully!');
+            };
+            
+            Tawk_API.onChatStarted = function(){
+                console.log('💬 Chat started');
+                // Optional: Send notification to Telegram when chat starts
+                const chatStartMessage = `
+🔥 <b>Live Chat Started!</b>
+
+💬 A visitor has started a live chat session on your website.
+
+🌐 <b>Source:</b> Tawk.to Live Chat
+⏰ <b>Time:</b> ${new Date().toLocaleString()}
+                `.trim();
+                
+                // Send to your Telegram bot
+                fetch('https://api.telegram.org/bot7563475603:AAH-bhTQky3DLzTAdA-V3MzzbU2p9zRx6eM/sendMessage', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: '5471707327',
+                        text: chatStartMessage,
+                        parse_mode: 'HTML'
+                    })
+                }).catch(err => console.log('Could not send chat notification'));
+            };
+        }
+    });
+    
+    // Function to open Tawk.to chat widget
+    function openTawkToChat() {
+        if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
+            Tawk_API.maximize();
+            console.log('💬 Opening Tawk.to chat widget');
+        } else {
+            // Fallback: Show a message if Tawk.to is not loaded yet
+            alert('💬 Loading chat system... Please try again in a moment!');
+            setTimeout(() => {
+                if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
+                    Tawk_API.maximize();
+                }
+            }, 2000);
+        }
+    }
     </script>
     <!--End of Tawk.to Script-->
 
