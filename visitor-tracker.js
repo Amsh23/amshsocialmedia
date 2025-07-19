@@ -23,7 +23,7 @@ DIGITAL SIGNATURE: AmirShirkhodaee-VisitorTracker-v1.0-2025
 class VisitorTracker {
     constructor() {
         this.BOT_TOKEN = '7563475603:AAH-bhTQky3DLzTAdA-V3MzzbU2p9zRx6eM';
-        this.CHAT_ID = null; // Will be auto-detected like the form
+        this.CHAT_ID = '5471707327'; // Updated Chat ID for @AmSh20003
         this.API_URL = `https://api.telegram.org/bot${this.BOT_TOKEN}/sendMessage`;
         this.GET_UPDATES_URL = `https://api.telegram.org/bot${this.BOT_TOKEN}/getUpdates`;
         
@@ -55,27 +55,23 @@ class VisitorTracker {
     }
     
     async getChatId() {
+        // Use the predefined Chat ID for @AmSh20003
+        if (!this.CHAT_ID) {
+            this.CHAT_ID = '5471707327';
+        }
+        
         try {
-            // Try localStorage first
+            // Try localStorage first as fallback
             const storedChatId = localStorage.getItem('telegram_chat_id');
-            if (storedChatId) {
-                this.CHAT_ID = storedChatId;
+            if (storedChatId && storedChatId === this.CHAT_ID) {
                 return;
             }
             
-            // Try to get from bot updates
-            const response = await fetch(this.GET_UPDATES_URL);
-            const data = await response.json();
+            // Store the current Chat ID
+            localStorage.setItem('telegram_chat_id', this.CHAT_ID);
             
-            if (data.ok && data.result && data.result.length > 0) {
-                const lastUpdate = data.result[data.result.length - 1];
-                if (lastUpdate.message && lastUpdate.message.chat) {
-                    this.CHAT_ID = lastUpdate.message.chat.id.toString();
-                    localStorage.setItem('telegram_chat_id', this.CHAT_ID);
-                }
-            }
         } catch (error) {
-            console.warn('⚠️ Could not get Chat ID for visitor tracking:', error);
+            console.warn('⚠️ Could not store Chat ID for visitor tracking:', error);
         }
     }
     

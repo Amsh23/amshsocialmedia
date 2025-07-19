@@ -119,7 +119,7 @@ try {
 // Helper function to send Telegram notification
 function sendTelegramNotification($sessionData, $message) {
     define('BOT_TOKEN', '7563475603:AAH-bhTQky3DLzTAdA-V3MzzbU2p9zRx6eM');
-    define('CHAT_ID', '5539055486'); // Replace with your Telegram chat ID
+    define('CHAT_ID', '5471707327'); // Updated Chat ID for @AmSh20003
     
     $telegramMessage = "💬 <b>New Message in Chat Session</b>\n\n";
     $telegramMessage .= "👤 <b>From:</b> " . htmlspecialchars($sessionData['name']) . "\n";
