@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Login - Amir Shirkhodaee</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .login-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            margin: 20px;
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .login-header h1 {
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-size: 2rem;
+        }
+        
+        .login-header p {
+            color: #666;
+            font-size: 1rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+        
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .status-message {
+            margin-top: 1rem;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+            font-weight: 500;
+        }
+        
+        .status-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        
+        .status-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #ffffff;
+            border-radius: 50%;
+            border-top-color: transparent;
+            animation: spin 1s ease-in-out infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .info-box {
+            background: #e7f3ff;
+            border: 1px solid #b6d7ff;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            color: #004085;
+        }
+        
+        .info-box h3 {
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+        
+        .info-box ul {
+            margin-left: 1rem;
+            font-size: 0.9rem;
+            line-height: 1.4;
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>💬 Chat Request</h1>
+            <p>Request a private chat session with Amir</p>
+        </div>
+        
+        <div class="info-box">
+            <h3>🔒 How it works:</h3>
+            <ul>
+                <li>Fill out your details below</li>
+                <li>Your request will be sent to Amir</li>
+                <li>You'll be redirected to a waiting page</li>
+                <li>Amir will send you a secure chat link via Telegram</li>
+                <li>Use the link to start your private conversation</li>
+            </ul>
+        </div>
+        
+        <form id="loginForm" action="login.php" method="POST">
+            <div class="form-group">
+                <label for="name">👤 Full Name</label>
+                <input type="text" id="name" name="name" required placeholder="Enter your full name">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">📧 Email Address</label>
+                <input type="email" id="email" name="email" required placeholder="your@email.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="telegram">📱 Telegram Username (Optional)</label>
+                <input type="text" id="telegram" name="telegram" placeholder="@yourusername">
+            </div>
+            
+            <div class="form-group">
+                <label for="subject">💭 Chat Subject</label>
+                <input type="text" id="subject" name="subject" required placeholder="What would you like to discuss?">
+            </div>
+            
+            <button type="submit" class="submit-btn" id="submitBtn">
+                🚀 Request Chat Session
+            </button>
+            
+            <div id="statusMessage" class="status-message" style="display: none;"></div>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = document.getElementById('submitBtn');
+            const statusMessage = document.getElementById('statusMessage');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="loading"></span> Processing Request...';
+            
+            // Get form data
+            const formData = new FormData(this);
+            
+            // Send to server
+            fetch('login.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    statusMessage.className = 'status-message status-success';
+                    statusMessage.textContent = data.message;
+                    statusMessage.style.display = 'block';
+                    
+                    // Redirect to waiting page after 2 seconds
+                    setTimeout(() => {
+                        window.location.href = 'waiting.php?session=' + data.session;
+                    }, 2000);
+                } else {
+                    statusMessage.className = 'status-message status-error';
+                    statusMessage.textContent = data.message;
+                    statusMessage.style.display = 'block';
+                    
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = '🚀 Request Chat Session';
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                statusMessage.className = 'status-message status-error';
+                statusMessage.textContent = 'An error occurred. Please try again.';
+                statusMessage.style.display = 'block';
+                
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '🚀 Request Chat Session';
+            });
+        });
+        
+        // Auto-format telegram username
+        document.getElementById('telegram').addEventListener('input', function(e) {
+            let value = e.target.value;
+            if (value && !value.startsWith('@')) {
+                e.target.value = '@' + value;
+            }
+        });
+    </script>
+</body>
+</html>
