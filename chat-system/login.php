@@ -2,7 +2,7 @@
 /*
 =========# Configuration
 define('BOT_TOKEN', '7563475603:AAH-bhTQky3DLzTAdA-V3MzzbU2p9zRx6eM');
-define('CHAT_ID', '5471707327'); // Updated Chat ID for @AmSh20003
+define('CHAT_ID', '5471707327'); // Updated Chat ID for user @AmSh20003 via bot @amshsocialbot
 define('SESSIONS_DIR', 'data/sessions/');=================================================================
                     SECURE CHAT LOGIN HANDLER
                     Copyright © 2025 Amir Shirkhodaee
@@ -23,7 +23,7 @@ ini_set('display_errors', 1);
 
 // Configuration
 define('BOT_TOKEN', '7563475603:AAH-bhTQky3DLzTAdA-V3MzzbU2p9zRx6eM');
-define('CHAT_ID', '5539055486'); // Replace with your Telegram chat ID
+define('CHAT_ID', '5471707327'); // Updated Chat ID for user @AmSh20003 via bot @amshsocialbot
 define('SESSIONS_DIR', 'data/sessions/');
 define('LOGS_DIR', 'data/logs/');
 define('CHAT_PASSWORD', 'meow'); // Password for accessing chat pages

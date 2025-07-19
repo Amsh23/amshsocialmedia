@@ -1430,6 +1430,32 @@ footer {
     100% { transform: scale(1); }
 }
 
+/* Telegram Bot Button Styling */
+.social-link.telegram-bot {
+    background: linear-gradient(135deg, #229ED9 0%, #0088CC 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-link.telegram-bot::before {
+    content: '🤖';
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+.social-link.telegram-bot:hover {
+    background: linear-gradient(135deg, #0088CC 0%, #005580 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(34, 158, 217, 0.4);
+}
+
+.social-link.telegram-bot i {
+    animation: pulse 3s infinite;
+}
+
 /* ===================================================
    End of CSS Styles - Copyright © 2025 Amir Shirkhodaee
    GitHub: https://github.com/Amsh23 | Email: amirshirkhodaeetari@gmail.com

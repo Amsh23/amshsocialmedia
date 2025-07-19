@@ -29,7 +29,7 @@ class TelegramMessageForm {
     constructor() {
         // Direct Telegram Bot API configuration (GitHub Pages compatible)
         this.BOT_TOKEN = '7563475603:AAH-bhTQky3DLzTAdA-V3MzzbU2p9zRx6eM';
-        this.CHAT_ID = '5471707327'; // Updated Chat ID for @AmSh20003
+        this.CHAT_ID = '5471707327'; // Updated Chat ID for user @AmSh20003 via bot @amshsocialbot
         this.API_URL = `https://api.telegram.org/bot${this.BOT_TOKEN}/sendMessage`;
         this.GET_UPDATES_URL = `https://api.telegram.org/bot${this.BOT_TOKEN}/getUpdates`;
         
@@ -408,7 +408,7 @@ ${visitorInfo}
         const botLink = document.getElementById('bot-link');
         if (botLink) {
             // Updated with actual bot username
-            const botUsername = 'AmSh20003';
+            const botUsername = 'amshsocialbot'; // Telegram bot username
             botLink.href = `https://t.me/${botUsername}`;
         }
     }

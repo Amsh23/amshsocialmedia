@@ -2,7 +2,7 @@
 /*
 =============# Telegram Configuration
 define('BOT_TOKEN', '7563475603:AAH-bhTQky3DLzTAdA-V3MzzbU2p9zRx6eM');
-define('CHAT_ID', '5471707327'); // Updated Chat ID for @AmSh20003==============================================================
+define('CHAT_ID', '5471707327'); // Updated Chat ID for user @AmSh20003 via bot @amshsocialbot==============================================================
                     CONFIGURATION FILE
                     Copyright © 2025 Amir Shirkhodaee
 ==============================================================================
