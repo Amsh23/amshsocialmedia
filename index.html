@@ -328,6 +328,219 @@ Copyright © 2025 Amir Shirkhodaee - All Rights Reserved
     })();
     </script>
     <!--End of Tawk.to Script-->
+
+    <!-- Visitor Counter -->
+    <div style="text-align: center; margin: 20px 0; padding: 10px;">
+        <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Famsh23.github.io%2Famshsocialmedia&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visitors&edge_flat=false" alt="Visitor Counter"/>
+    </div>
+
+    <!-- Enhanced Contact Form Modal -->
+    <div id="contact-form-modal" style="display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: none; border-radius: 10px; width: 90%; max-width: 500px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="color: #333; margin: 0;">Contact Form</h2>
+                <span id="close-contact-form" style="color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer; line-height: 1;">&times;</span>
+            </div>
+            <form id="enhanced-contact-form">
+                <div style="margin-bottom: 15px;">
+                    <label for="contact-name" style="display: block; margin-bottom: 5px; color: #555; font-weight: bold;">Name:</label>
+                    <input type="text" id="contact-name" name="name" required style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; box-sizing: border-box;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="contact-email" style="display: block; margin-bottom: 5px; color: #555; font-weight: bold;">Email:</label>
+                    <input type="email" id="contact-email" name="email" required style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; box-sizing: border-box;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label for="contact-message" style="display: block; margin-bottom: 5px; color: #555; font-weight: bold;">Message:</label>
+                    <textarea id="contact-message" name="message" rows="4" required style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; box-sizing: border-box; resize: vertical;"></textarea>
+                </div>
+                <button type="submit" style="background: linear-gradient(45deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; width: 100%; transition: transform 0.2s;">Send Message</button>
+            </form>
+            <div id="contact-form-status" style="margin-top: 15px; display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Contact Form Toggle Button -->
+    <div id="contact-form-toggle" style="position: fixed; bottom: 80px; right: 20px; z-index: 9999; background: linear-gradient(45deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 20px; border-radius: 25px; cursor: pointer; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s; user-select: none;">
+        📧 Contact Form
+    </div>
+
+    <!-- Enhanced JavaScript for all features -->
+    <script>
+    // Configuration variables (easily replaceable)
+    const TELEGRAM_BOT_TOKEN = '7563475603:AAH-bhTQky3DLzTAdA-V3MzzbU2p9zRx6eM';
+    const TELEGRAM_CHAT_ID = '5471707327';
+    const TELEGRAM_API_URL = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+    // Auto-removal of explanatory texts after page load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Remove paragraphs containing specified phrases
+        const paragraphs = document.querySelectorAll('p');
+        paragraphs.forEach(p => {
+            const text = p.textContent || p.innerText;
+            if (text.includes('Website visitor counter:') || 
+                text.includes('Instant Telegram Bot notifications')) {
+                p.style.display = 'none';
+                // Optional: completely remove from DOM after a short delay
+                setTimeout(() => p.remove(), 100);
+            }
+        });
+    });
+
+    // Contact Form Modal functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('contact-form-modal');
+        const toggleBtn = document.getElementById('contact-form-toggle');
+        const closeBtn = document.getElementById('close-contact-form');
+        const form = document.getElementById('enhanced-contact-form');
+        const status = document.getElementById('contact-form-status');
+
+        // Open modal
+        toggleBtn.addEventListener('click', function() {
+            modal.style.display = 'block';
+        });
+
+        // Close modal
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Enhanced form submission with Telegram notification
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const message = formData.get('message');
+
+            // Show loading status
+            status.style.display = 'block';
+            status.innerHTML = '<div style="color: #2196F3;">📤 Sending message...</div>';
+
+            try {
+                // Send to Telegram
+                const telegramMessage = `
+🔔 <b>New Contact Form Submission</b>
+
+👤 <b>Name:</b> ${name}
+📧 <b>Email:</b> ${email}
+
+💬 <b>Message:</b>
+${message}
+
+🌐 <b>Source:</b> Website Contact Form
+⏰ <b>Time:</b> ${new Date().toLocaleString()}
+                `.trim();
+
+                const telegramResponse = await fetch(TELEGRAM_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: telegramMessage,
+                        parse_mode: 'HTML'
+                    })
+                });
+
+                if (telegramResponse.ok) {
+                    // Store locally as well
+                    const submissions = JSON.parse(localStorage.getItem('contact_submissions') || '[]');
+                    submissions.push({
+                        name,
+                        email,
+                        message,
+                        timestamp: new Date().toISOString(),
+                        telegramSent: true
+                    });
+                    localStorage.setItem('contact_submissions', JSON.stringify(submissions));
+
+                    // Show success message
+                    status.innerHTML = '<div style="color: #4CAF50;">✅ Message sent successfully! We\'ll get back to you soon.</div>';
+                    form.reset();
+
+                    // Close modal after delay
+                    setTimeout(() => {
+                        modal.style.display = 'none';
+                        status.style.display = 'none';
+                    }, 3000);
+                } else {
+                    throw new Error('Telegram notification failed');
+                }
+            } catch (error) {
+                console.error('Error sending message:', error);
+                
+                // Store locally even if Telegram fails
+                const submissions = JSON.parse(localStorage.getItem('contact_submissions') || '[]');
+                submissions.push({
+                    name,
+                    email,
+                    message,
+                    timestamp: new Date().toISOString(),
+                    telegramSent: false
+                });
+                localStorage.setItem('contact_submissions', JSON.stringify(submissions));
+
+                status.innerHTML = '<div style="color: #ff9800;">⚠️ Message saved locally. Please try again or contact directly via email.</div>';
+            }
+        });
+
+        // Hover effect for toggle button
+        toggleBtn.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.6)';
+        });
+
+        toggleBtn.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 4px 15px rgba(102, 126, 234, 0.4)';
+        });
+    });
+
+    // Enhance existing Telegram form if it exists
+    document.addEventListener('DOMContentLoaded', function() {
+        const existingTelegramForm = document.getElementById('telegram-message-form');
+        if (existingTelegramForm) {
+            existingTelegramForm.addEventListener('submit', async function(e) {
+                const messageInput = document.getElementById('telegram-message-input');
+                if (messageInput && messageInput.value.trim()) {
+                    // Send notification about direct message
+                    try {
+                        const directMessage = `
+🔔 <b>Direct Website Message</b>
+
+💬 <b>Message:</b>
+${messageInput.value.trim()}
+
+🌐 <b>Source:</b> Website Direct Form
+⏰ <b>Time:</b> ${new Date().toLocaleString()}
+                        `.trim();
+
+                        await fetch(TELEGRAM_API_URL, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                chat_id: TELEGRAM_CHAT_ID,
+                                text: directMessage,
+                                parse_mode: 'HTML'
+                            })
+                        });
+                    } catch (error) {
+                        console.warn('Could not send Telegram notification:', error);
+                    }
+                }
+            });
+        }
+    });
+    </script>
+
 </body>
 <!--
 ==============================================================================
