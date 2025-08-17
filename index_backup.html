@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<!--
+==============================================================================
+                    SOCIAL MEDIA WEBSITE WITH 3D CHARACTER
+                    Copyright © 2025 Amir Shirkhodaee
+==============================================================================
+
+AUTHOR: Amir Shirkhodaee
+DATE: June 28, 2025
+VERSION: v1.0
+GITHUB: https://github.com/Amsh23
+EMAIL: amirshirkhodaeetari@gmail.com
+
+FEATURES:
+- Complete social media links integration
+- Interactive 3D character with animations
+- Responsive design for all devices
+- Professional portfolio showcase
+
+DIGITAL SIGNATURE: AmirShirkhodaee-SocialMediaSite-v1.0-2025
+CHECKSUM: A7F9E2B8D4C31X05
+
+WARNING: Unauthorized modification is prohibited
+Copyright © 2025 Amir Shirkhodaee - All Rights Reserved
+
+==============================================================================
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amir Shirkhodaee - Social Links</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://unpkg.com/three@0.128.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+</head>
+<body>
+    <div class="container">
+        <div class="profile">
+            <div class="profile-image">
+                <img src="pics/profile.jpg" alt="Amir Shirkhodaee">
+            </div>
+            <h1 class="profile-name">Amir Shirkhodaee</h1>
+            <div class="profile-contact">
+                <a href="mailto:amirshirkhodaeetari@gmail.com" class="contact-link"><i class="fas fa-envelope"></i> amirshirkhodaeetari@gmail.com</a>
+            </div>
+        </div>
+
+        <div class="social-links-container">
+            <h2 class="social-links-header professional">Professional Networks</h2>
+            <div class="social-links professional">
+                <a href="https://www.linkedin.com/in/amir-shirkhodaee" class="social-link linkedin" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+                
+                <a href="https://github.com/Amsh23" class="social-link github" target="_blank">
+                    <i class="fab fa-github"></i>
+                    <span>GitHub</span>
+                </a>
+                
+                <a href="https://amsh23.github.io/my-portfolio/" class="social-link portfolio" target="_blank">
+                    <i class="fas fa-briefcase"></i>
+                    <span>Portfolio</span>
+                </a>
+                
+                <a href="https://x.com/AmShiii2003" class="social-link twitter" target="_blank">
+                    <i class="fab fa-x-twitter"></i>
+                    <span>Twitter (X)</span>
+                </a>
+            </div>
+
+            <h2 class="social-links-header contact">Contact Methods</h2>
+            <div class="social-links contact">
+                <a href="mailto:amirshirkhodaeetari@gmail.com" class="social-link email" target="_blank">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+                
+                <a href="mailto:mrhflateric@proton.me" class="social-link protonmail" target="_blank">
+                    <i class="fas fa-envelope-square"></i>
+                    <span>Proton Mail</span>
+                </a>
+                
+                <a href="https://t.me/AmSh20003" class="social-link telegram" target="_blank">
+                    <i class="fab fa-telegram"></i>
+                    <span>Telegram PV</span>
+                </a>
+                
+                <a href="https://t.me/amshsocialbot" class="social-link telegram-bot" target="_blank">
+                    <i class="fas fa-robot"></i>
+                    <span>Telegram Bot</span>
+                </a>
+                
+                <a href="meowflat" class="social-link nullchat" target="_blank">
+                    <i class="fas fa-comment-alt"></i>
+                    <span>meowflat</span>
+                </a>
+                
+                <a href="mailto:mrhflateric@dnmx.su" class="social-link dnmx" target="_blank">
+                    <i class="fas fa-envelope"></i>
+                    <span>DNMX</span>
+                </a>
+                
+                <a href="https://real-time-chatbox.onrender.com/" class="social-link chat" target="_blank">
+                    <i class="fas fa-comments"></i>
+                    <span>Chat With Me</span>
+                </a>
+                
+                <a href="contact.html" class="social-link contact-form">
+                    <i class="fas fa-paper-plane"></i>
+                    <span>Contact Form</span>
+                </a>
+                
+                <a href="javascript:void(0)" class="social-link live-chat" onclick="openTawkToChat()">
+                    <i class="fas fa-headset"></i>
+                    <span>Live Chat Support</span>
+                </a>
+                
+                <a href="analytics.html" class="social-link analytics" target="_blank">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Analytics Dashboard</span>
+                </a>
+            </div>
+            
+            <h2 class="social-links-header personal">Other Platforms</h2>
+            <div class="social-links personal">
+                <a href="https://www.instagram.com/am_.shi" class="social-link instagram" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                    <span>Instagram</span>
+                </a>
+                
+                <a href="https://discord.gg/QbzEzsUm" class="social-link discord" target="_blank">
+                    <i class="fab fa-discord"></i>
+                    <span>Discord</span>
+                </a>
+                
+                <a href="https://t.me/amshstickers" class="social-link telegram-stickers" target="_blank">
+                    <i class="fab fa-telegram"></i>
+                    <span>Telegram Stickers</span>
+                </a>
+                
+                <a href="https://www.paypal.com/paypalme/amir8761" class="social-link paypal" target="_blank">
+                    <i class="fab fa-paypal"></i>
+                    <span>Donate (PayPal)</span>
+                </a>
+                
+                <a href="https://coff.ee/amir7657" class="social-link buymeacoffee" target="_blank">
+                    <i class="fas fa-coffee"></i>
+                    <span>Buy Me A Coffee</span>
+                </a>
+                
+                <a href="https://www.youtube.com/@VelvetKissss" class="social-link youtube" target="_blank">
+                    <i class="fab fa-youtube"></i>
+                    <span>YouTube</span>
+                </a>
+                
+                <a href="https://www.twitch.tv/alphareturn10" class="social-link twitch" target="_blank">
+                    <i class="fab fa-twitch"></i>
+                    <span>Twitch</span>
+                </a>
+                
+                <a href="https://kick.com/velvetkisss" class="social-link kick" target="_blank">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Kick</span>
+                </a>
+                
+                <a href="https://trovo.live/s/VelvetKisss" class="social-link trovo" target="_blank">
+                    <i class="fas fa-tv"></i>
+                    <span>Trovo</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- Professional Projects Section -->
+        <div class="projects-section">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="projects-list">
+                <div class="project-card">
+                    <h3>AI-Powered Chat Application</h3>
+                    <p>A real-time chat application with AI integration for automated responses and content moderation.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Node.js</span>
+                        <span class="project-tag">Socket.IO</span>
+                        <span class="project-tag">TensorFlow.js</span>
+                    </div>
+                    <a href="https://real-time-chatbox.onrender.com/" target="_blank" class="project-link">View Project <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="project-card">
+                    <h3>Portfolio Website</h3>
+                    <p>A responsive portfolio website showcasing my skills and professional experience.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">HTML5</span>
+                        <span class="project-tag">CSS3</span>
+                        <span class="project-tag">JavaScript</span>
+                    </div>
+                    <a href="https://amsh23.github.io/my-portfolio/" target="_blank" class="project-link">View Project <i class="fas fa-external-link-alt"></i></a>
+                </div>
+                <div class="project-card">
+                    <h3>Telegram Sticker Creator</h3>
+                    <p>Custom sticker creation tool for Telegram with automated image processing capabilities.</p>
+                    <div class="project-tags">
+                        <span class="project-tag">Python</span>
+                        <span class="project-tag">Pillow</span>
+                        <span class="project-tag">Telegram API</span>
+                    </div>
+                    <a href="https://t.me/amshstickers" target="_blank" class="project-link">View Project <i class="fas fa-external-link-alt"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="spotify-section">
+            <h2 class="section-title">My Spotify Podcast</h2>
+            <div class="spotify-container">
+                <iframe style="border-radius:12px" src="https://open.spotify.com/embed/show/0C5T1AlMB4FZpLNLFs8h1A?utm_source=generator&theme=0" width="100%" height="352" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+            </div>
+        </div>
+
+        <!-- 3D Character Viewer Section -->
+        <section id="character-viewer">
+            <h2 class="section-title">Interactive 3D Character</h2>
+            <p class="character-description">My VRoid Studio character with interactive animations and mouse tracking. Click on the character or use the controls below!</p>
+            
+            <div id="three-container">
+                <div id="viewer"></div>
+                <div id="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Loading 3D Character...</p>
+                </div>
+            </div>
+            
+            <div id="animation-controls">
+                <button id="idle-btn" class="anim-btn active">Idle</button>
+                <button id="dance-btn" class="anim-btn">Dance</button>
+                <button id="wave-btn" class="anim-btn">Wave</button>
+                <button id="special-btn" class="anim-btn">Special</button>
+            </div>
+            
+            <div id="character-info">
+                <p><i class="fas fa-mouse-pointer"></i> Move your mouse to make the character look at you</p>
+                <p><i class="fas fa-hand-pointer"></i> Click on the character for a special animation</p>
+                <p><i class="fas fa-gamepad"></i> Use mouse to orbit around the character</p>
+            </div>
+        </section>
+
+        <!-- Telegram Message Form Section -->
+        <section id="telegram-contact">
+            <h2 class="section-title">📱 Send me a Message</h2>
+            <p class="contact-description">Want to get in touch? Send me a message directly through Telegram!</p>
+            
+            <div id="telegram-form-container">
+                <form id="telegram-message-form">
+                    <div class="form-group">
+                        <textarea 
+                            id="telegram-message-input" 
+                            placeholder="Type your message here... (max 500 characters)"
+                            maxlength="500"
+                            rows="4"
+                            required
+                        ></textarea>
+                        <div class="char-counter">
+                            <span id="char-count">0</span>/500 characters
+                        </div>
+                    </div>
+                    <button type="submit" id="send-btn">
+                        <i class="fab fa-telegram-plane"></i>
+                        Send to Telegram
+                    </button>
+                    
+                    <div class="bot-setup-controls">
+                        <button type="button" id="test-connection-btn" class="test-btn">
+                            <i class="fas fa-cog"></i>
+                            Test Bot Connection
+                        </button>
+                        <a href="https://t.me/amshsocialbot" target="_blank" id="bot-link" class="bot-link">
+                            <i class="fab fa-telegram"></i>
+                            Start Conversation with Bot
+                        </a>
+                    </div>
+                </form>
+                
+                <div id="message-status" class="hidden">
+                    <div id="success-message" class="status-message success hidden">
+                        <i class="fas fa-check-circle"></i>
+                        Message sent successfully!
+                    </div>
+                    <div id="error-message" class="status-message error hidden">
+                        <i class="fas fa-exclamation-circle"></i>
+                        Failed to send message. Please try again.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Learning and Features Section -->
+        <div style="font-family: Arial, sans-serif; font-size: 14px; color: #444; max-width: 600px; margin: 20px auto; line-height: 1.5;">
+            <p>I recently started the Algorithms and DSA course and I'm currently learning. This is also a test with AI.</p>
+
+            <p>3. 📊 Website visitor counter:<br>
+            Using <a href="https://hits.seeyoufarm.com" target="_blank" rel="noopener">https://hits.seeyoufarm.com</a> or <a href="https://countapi.xyz" target="_blank" rel="noopener">countapi.xyz</a><br>
+            Track page visits (and even message submissions count).</p>
+
+            <p>🔥 Recommended features to add to your website:<br>
+            1. ✨ Instant Telegram Bot notifications<br>
+            Whenever someone submits a message form, a notification will be sent to your Telegram bot.<br>
+            Simple using <code>https://api.telegram.org/bot&lt;token&gt;/sendMessage</code>.<br>
+            I can provide ready code that sends the form data to Telegram.</p>
+        </div>
+
+        <!-- Visitor Counter -->
+        <div style="text-align:center; margin: 20px 0;">
+            <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Famsh23.github.io%2Famshsocialmedia&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visitors&edge_flat=false"/>
+        </div>
+
+        <footer>
+            <p>&copy; 2025 Amir Shirkhodaee | Created with ❤️</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+    <script src="character-viewer.js"></script>
+    <script src="visitor-tracker.js"></script>
+    <script src="telegram-form.js"></script>
+
+    <!--Start of Tawk.to Script-->
+    <script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/669ceb7abecc2fed692bf55e/1i35m5a7r';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    
+    // Additional Tawk.to customization
+    window.addEventListener('load', function() {
+        // Ensure Tawk.to is properly loaded
+        if (typeof Tawk_API !== 'undefined') {
+            Tawk_API.onLoad = function(){
+                console.log('💬 Tawk.to Chat Widget loaded successfully!');
+            };
+            
+            Tawk_API.onChatStarted = function(){
+                console.log('💬 Chat started');
+                // Optional: Send notification to Telegram when chat starts
+                const chatStartMessage = `
+🔥 <b>Live Chat Started!</b>
+
+💬 A visitor has started a live chat session on your website.
+
+🌐 <b>Source:</b> Tawk.to Live Chat
+⏰ <b>Time:</b> ${new Date().toLocaleString()}
+                `.trim();
+                
+                // Send to your Telegram bot
+                fetch('https://api.telegram.org/bot7563475603:AAH-bhTQky3DLzTAdA-V3MzzbU2p9zRx6eM/sendMessage', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: '5471707327',
+                        text: chatStartMessage,
+                        parse_mode: 'HTML'
+                    })
+                }).catch(err => console.log('Could not send chat notification'));
+            };
+        }
+    });
+    
+    // Function to open Tawk.to chat widget
+    function openTawkToChat() {
+        if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
+            Tawk_API.maximize();
+            console.log('💬 Opening Tawk.to chat widget');
+        } else {
+            // Fallback: Show a message if Tawk.to is not loaded yet
+            alert('💬 Loading chat system... Please try again in a moment!');
+            setTimeout(() => {
+                if (typeof Tawk_API !== 'undefined' && Tawk_API.maximize) {
+                    Tawk_API.maximize();
+                }
+            }, 2000);
+        }
+    }
+    </script>
+    <!--End of Tawk.to Script-->
+
+    <!-- Visitor Counter -->
+    <div style="text-align: center; margin: 20px 0; padding: 10px;">
+        <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Famsh23.github.io%2Famshsocialmedia&count_bg=%2379C83D&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=visitors&edge_flat=false" alt="Visitor Counter"/>
+    </div>
+
+    <!-- Enhanced Contact Form Modal -->
+    <div id="contact-form-modal" style="display: none; position: fixed; z-index: 10000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4);">
+        <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: none; border-radius: 10px; width: 90%; max-width: 500px; box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <h2 style="color: #333; margin: 0;">Contact Form</h2>
+                <span id="close-contact-form" style="color: #aaa; font-size: 28px; font-weight: bold; cursor: pointer; line-height: 1;">&times;</span>
+            </div>
+            <form id="enhanced-contact-form">
+                <div style="margin-bottom: 15px;">
+                    <label for="contact-name" style="display: block; margin-bottom: 5px; color: #555; font-weight: bold;">Name:</label>
+                    <input type="text" id="contact-name" name="name" required style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; box-sizing: border-box;">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label for="contact-email" style="display: block; margin-bottom: 5px; color: #555; font-weight: bold;">Email:</label>
+                    <input type="email" id="contact-email" name="email" required style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; box-sizing: border-box;">
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label for="contact-message" style="display: block; margin-bottom: 5px; color: #555; font-weight: bold;">Message:</label>
+                    <textarea id="contact-message" name="message" rows="4" required style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; box-sizing: border-box; resize: vertical;"></textarea>
+                </div>
+                <button type="submit" style="background: linear-gradient(45deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; width: 100%; transition: transform 0.2s;">Send Message</button>
+            </form>
+            <div id="contact-form-status" style="margin-top: 15px; display: none;"></div>
+        </div>
+    </div>
+
+    <!-- Contact Form Toggle Button -->
+    <div id="contact-form-toggle" style="position: fixed; bottom: 80px; right: 20px; z-index: 9999; background: linear-gradient(45deg, #667eea 0%, #764ba2 100%); color: white; padding: 12px 20px; border-radius: 25px; cursor: pointer; box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4); transition: all 0.3s; user-select: none;">
+        📧 Contact Form
+    </div>
+
+    <!-- Enhanced JavaScript for all features -->
+    <script>
+    // Configuration variables (easily replaceable)
+    const TELEGRAM_BOT_TOKEN = '7563475603:AAH-bhTQky3DLzTAdA-V3MzzbU2p9zRx6eM';
+    const TELEGRAM_CHAT_ID = '5471707327';
+    const TELEGRAM_API_URL = `https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage`;
+
+    // Auto-removal of explanatory texts after page load
+    document.addEventListener('DOMContentLoaded', function() {
+        // Remove paragraphs containing specified phrases
+        const paragraphs = document.querySelectorAll('p');
+        paragraphs.forEach(p => {
+            const text = p.textContent || p.innerText;
+            if (text.includes('Website visitor counter:') || 
+                text.includes('Instant Telegram Bot notifications')) {
+                p.style.display = 'none';
+                // Optional: completely remove from DOM after a short delay
+                setTimeout(() => p.remove(), 100);
+            }
+        });
+    });
+
+    // Contact Form Modal functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const modal = document.getElementById('contact-form-modal');
+        const toggleBtn = document.getElementById('contact-form-toggle');
+        const closeBtn = document.getElementById('close-contact-form');
+        const form = document.getElementById('enhanced-contact-form');
+        const status = document.getElementById('contact-form-status');
+
+        // Open modal
+        toggleBtn.addEventListener('click', function() {
+            modal.style.display = 'block';
+        });
+
+        // Close modal
+        closeBtn.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        });
+
+        // Enhanced form submission with Telegram notification
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(form);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const message = formData.get('message');
+
+            // Show loading status
+            status.style.display = 'block';
+            status.innerHTML = '<div style="color: #2196F3;">📤 Sending message...</div>';
+
+            try {
+                // Send to Telegram
+                const telegramMessage = `
+🔔 <b>New Contact Form Submission</b>
+
+👤 <b>Name:</b> ${name}
+📧 <b>Email:</b> ${email}
+
+💬 <b>Message:</b>
+${message}
+
+🌐 <b>Source:</b> Website Contact Form
+⏰ <b>Time:</b> ${new Date().toLocaleString()}
+                `.trim();
+
+                const telegramResponse = await fetch(TELEGRAM_API_URL, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        chat_id: TELEGRAM_CHAT_ID,
+                        text: telegramMessage,
+                        parse_mode: 'HTML'
+                    })
+                });
+
+                if (telegramResponse.ok) {
+                    // Store locally as well
+                    const submissions = JSON.parse(localStorage.getItem('contact_submissions') || '[]');
+                    submissions.push({
+                        name,
+                        email,
+                        message,
+                        timestamp: new Date().toISOString(),
+                        telegramSent: true
+                    });
+                    localStorage.setItem('contact_submissions', JSON.stringify(submissions));
+
+                    // Show success message
+                    status.innerHTML = '<div style="color: #4CAF50;">✅ Message sent successfully! We\'ll get back to you soon.</div>';
+                    form.reset();
+
+                    // Close modal after delay
+                    setTimeout(() => {
+                        modal.style.display = 'none';
+                        status.style.display = 'none';
+                    }, 3000);
+                } else {
+                    throw new Error('Telegram notification failed');
+                }
+            } catch (error) {
+                console.error('Error sending message:', error);
+                
+                // Store locally even if Telegram fails
+                const submissions = JSON.parse(localStorage.getItem('contact_submissions') || '[]');
+                submissions.push({
+                    name,
+                    email,
+                    message,
+                    timestamp: new Date().toISOString(),
+                    telegramSent: false
+                });
+                localStorage.setItem('contact_submissions', JSON.stringify(submissions));
+
+                status.innerHTML = '<div style="color: #ff9800;">⚠️ Message saved locally. Please try again or contact directly via email.</div>';
+            }
+        });
+
+        // Hover effect for toggle button
+        toggleBtn.addEventListener('mouseenter', function() {
+            this.style.transform = 'translateY(-2px)';
+            this.style.boxShadow = '0 6px 20px rgba(102, 126, 234, 0.6)';
+        });
+
+        toggleBtn.addEventListener('mouseleave', function() {
+            this.style.transform = 'translateY(0)';
+            this.style.boxShadow = '0 4px 15px rgba(102, 126, 234, 0.4)';
+        });
+    });
+
+    // Enhance existing Telegram form if it exists
+    document.addEventListener('DOMContentLoaded', function() {
+        const existingTelegramForm = document.getElementById('telegram-message-form');
+        if (existingTelegramForm) {
+            existingTelegramForm.addEventListener('submit', async function(e) {
+                const messageInput = document.getElementById('telegram-message-input');
+                if (messageInput && messageInput.value.trim()) {
+                    // Send notification about direct message
+                    try {
+                        const directMessage = `
+🔔 <b>Direct Website Message</b>
+
+💬 <b>Message:</b>
+${messageInput.value.trim()}
+
+🌐 <b>Source:</b> Website Direct Form
+⏰ <b>Time:</b> ${new Date().toLocaleString()}
+                        `.trim();
+
+                        await fetch(TELEGRAM_API_URL, {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                chat_id: TELEGRAM_CHAT_ID,
+                                text: directMessage,
+                                parse_mode: 'HTML'
+                            })
+                        });
+                    } catch (error) {
+                        console.warn('Could not send Telegram notification:', error);
+                    }
+                }
+            });
+        }
+    });
+    </script>
+
+</body>
+<!--
+==============================================================================
+End of Social Media Website - Copyright © 2025 Amir Shirkhodaee
+GitHub: https://github.com/Amsh23 | Email: amirshirkhodaeetari@gmail.com
+DIGITAL SIGNATURE: AmirShirkhodaee-SocialMediaSite-v1.0-2025
+==============================================================================
+-->
+</html>
